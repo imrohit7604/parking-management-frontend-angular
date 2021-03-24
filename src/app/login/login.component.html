@@ -1,0 +1,27 @@
+<br/>
+
+
+<br/>
+<div class="container"> 
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <i class="fa fa-lock fa-5x" aria-hidden="true"></i>
+      <h1>Login</h1>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email" >
+          <div *ngIf="(email()!.touched&&email()!.invalid)" class="alert alert-danger">
+              <div *ngIf="email()!.errors!.required">*Required</div>
+              <div *ngIf="email()!.errors!.email">Enter vaild mail </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+        </div>
+        <div *ngIf="(password()!.touched&&password()!.invalid)" class="alert alert-danger">
+          <div *ngIf="password()!.errors!.required">*Required</div>
+         
+      </div>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Login</button>
+      </form>
+</div>
