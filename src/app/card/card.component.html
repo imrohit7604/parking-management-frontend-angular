@@ -1,0 +1,22 @@
+
+
+<div *ngIf="!switch" class="card">
+    <div class="cardheader">
+    <h1>A01</h1>
+    </div>
+    <h2>Vacant</h2>
+    <p>Registration Number</p>
+    <button class="btn btn-primary" (click)="onBackClick()">Book</button>
+  </div>
+  <div *ngIf="switch" class="card">
+    <form [formGroup]="form">
+      <div class="mb-3">
+        <i class="fa fa-arrow-left fa-2x" aria-hidden="true" (click)="onBackClick()"></i>
+        <label for="regNo" class="form-label"  > Registration Number</label>
+        <input type="text" class="form-control" placeholder="Like DL01-09090" id="regNo" formControlName="registerNo">
+    
+      </div>
+      <button [disabled]="!form.valid" class="btn btn-primary" (click)="onSubmit()">Book</button>
+    </form>
+    
+  </div>

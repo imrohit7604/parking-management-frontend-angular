@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { CardComponent } from './card/card.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NotfoundComponent } from './notfound/notfound.component';
     NavbarComponent,
     LoginComponent,
     SignupComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    CardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

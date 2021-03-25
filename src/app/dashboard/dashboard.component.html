@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row dashboard">
+      <div class="col-8">
+        <h3>Parking Agent Counter DashBoard</h3>
+      </div>
+      <div class="col">
+        <div class="dropdown">
+            <button class="dropbtn">Sort By</button>
+            <div *ngFor="let zone of parkingZones" class="dropdown-content">
+              <a>{{zone.parkingZoneTitle}}</a>                     
+            </div>
+          </div>
+      </div>
+      <div *ngFor="let zone of parkingZones" class="col">
+        <h3>{{zone.parkingZoneTitle}}</h3>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-8">  
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                    <div class="col-sm">
+                        <app-card></app-card>
+                    </div>
+                </div>
+            </div>
+         </div>  
+         <div class="col">
+            <h1>Rohit</h1>
+        </div> 
+    </div>
+  </div>
+
+ 
