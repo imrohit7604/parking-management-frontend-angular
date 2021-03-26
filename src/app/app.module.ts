@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { CardComponent } from './card/card.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ParkingreportComponent } from './parkingreport/parkingreport.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SignupComponent,
     NotfoundComponent,
     CardComponent,
-    DashboardComponent
+    DashboardComponent,
+    ParkingreportComponent
   ],
   imports: [
     BrowserModule,

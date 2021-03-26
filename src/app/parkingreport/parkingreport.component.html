@@ -1,0 +1,26 @@
+<div class="accordion" (click)="onClick()">
+   Zone {{zoneReport.title}}
+</div>
+<table *ngIf="showTable" class="table">
+    <thead>
+      <tr>
+      
+        <th scope="col">Parking Space</th>
+        <th scope="col">No Of Booking</th>
+        <th scope="col">Any Vehicle Parked</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let info of zoneReport.value">
+      <tr>
+        <td>{{info.title}}</td>
+        <td>
+          <div *ngIf="info.value.noOfBookings; else elseBlock1">{{info.value.noOfBookings}}</div>
+          <ng-template #elseBlock1>0</ng-template>
+        </td>
+        <td>
+          <div *ngIf="info.value.vehicleParked==0; else elseBlock">No</div>
+          <ng-template #elseBlock>Yes</ng-template>
+        </td>
+      </tr>     
+    </tbody>
+  </table>

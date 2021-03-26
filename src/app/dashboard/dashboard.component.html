@@ -7,59 +7,30 @@
         <div class="dropdown">
             <button class="dropbtn">Sort By</button>
             <div *ngFor="let zone of parkingZones" class="dropdown-content">
-              <a>{{zone.parkingZoneTitle}}</a>                     
+             <a (click)="onZoneClick(zone)">{{zone.parkingZoneTitle}}</a>                    
             </div>
           </div>
       </div>
-      <div *ngFor="let zone of parkingZones" class="col">
-        <h3>{{zone.parkingZoneTitle}}</h3>
+      <div  class="col">
+        <h3>Reset</h3>
       </div>
     </div>
     <div class="row">
         <div class="col-8">  
             <div class="container">
                 <div class="row">
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
-                    </div>
-                    <div class="col-sm">
-                        <app-card></app-card>
+                    <div *ngFor=" let space of parkingSpaces" class="col-sm extra-margin">
+                        <app-card [spaceInfo]="space"></app-card>
                     </div>
                 </div>
             </div>
          </div>  
-         <div class="col">
-            <h1>Rohit</h1>
+         <div  class="col">
+           <h1 class="margin">Parking Zone Report</h1>
+           <div *ngFor="let report of parkingReport">
+            <app-parkingreport [zoneReport]="report"></app-parkingreport>
+           </div>
+           
         </div> 
     </div>
   </div>

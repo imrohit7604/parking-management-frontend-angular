@@ -1,22 +1,31 @@
 
 
 <div *ngIf="!switch" class="card">
-    <div class="cardheader">
-    <h1>A01</h1>
+    <div class="cardheader" [class.Booked]="spaceInfo.parkingSpaceTitle.vehicleId!=null">
+    <h1>{{spaceInfo.parkingSpaceTitle.title}}</h1>
     </div>
-    <h2>Vacant</h2>
-    <p>Registration Number</p>
-    <button class="btn btn-primary" (click)="onBackClick()">Book</button>
+    <h2 *ngIf="spaceInfo.registrationNumber==null; else elseBlock">Vacant</h2>
+    <ng-template #elseBlock><h2>Occupied</h2></ng-template>
+    <p *ngIf="spaceInfo.registrationNumber!=null; else elseBlock1">{{spaceInfo.registrationNumber}}</p>
+    <ng-template #elseBlock1><p>Registration Number</p></ng-template>
+    <button class="btn" [class]="{'btn-primary':spaceInfo.registrationNumber==null,'btn-danger':spaceInfo.registrationNumber!=null}" (click)="onBackClick()">
+     <div *ngIf="spaceInfo.registrationNumber!=null; else elseBlock2">Release</div>
+     <ng-template #elseBlock2>Book</ng-template>
+    </button>
   </div>
   <div *ngIf="switch" class="card">
     <form [formGroup]="form">
       <div class="mb-3">
         <i class="fa fa-arrow-left fa-2x" aria-hidden="true" (click)="onBackClick()"></i>
-        <label for="regNo" class="form-label"  > Registration Number</label>
-        <input type="text" class="form-control" placeholder="Like DL01-09090" id="regNo" formControlName="registerNo">
+        <label for="regNo" class="form-label"> Registration Number</label>
+        <div *ngIf="error"class="alert alert-danger">Vehicle Already Parked</div>
+        <input type="text" class="form-control"  placeholder="Like DL01-09090" id="regNo" formControlName="registerNo">
     
       </div>
-      <button [disabled]="!form.valid" class="btn btn-primary" (click)="onSubmit()">Book</button>
+      <button [disabled]="!form.valid&&spaceInfo.registrationNumber==null" class="btn" [class]="{'btn-primary':spaceInfo.registrationNumber==null,'btn-danger':spaceInfo.registrationNumber!=null}" (click)="onSubmit()">
+        <div *ngIf="spaceInfo.registrationNumber!=null; else elseBlock3">Release</div>
+        <ng-template #elseBlock3>Book</ng-template>
+      </button>
     </form>
     
   </div>

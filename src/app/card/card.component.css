@@ -7,6 +7,10 @@
     font-family: arial;
     border-radius: 10px;  
   }
+  .alert{
+    padding: 0px;
+    margin: 0px 0px 5px 0px;
+  }
   .card h2{
       margin-top: 5px;
   }

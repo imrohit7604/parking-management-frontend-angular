@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ParkingService } from '../parking.service';
 
 @Component({
   selector: 'app-card',
@@ -9,15 +10,46 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class CardComponent implements OnInit {
 
   switch:boolean=false
-  form:any
-  constructor(private formBuilder:FormBuilder) { }
+  form!: FormGroup;
+  error:any
+  constructor(private formBuilder:FormBuilder,private parkingService:ParkingService) { }
 
+  @Input("spaceInfo") spaceInfo:any;
   onBackClick():void{
-    this.switch=!this.switch;
+    this.switch=!this.switch; 
   }
 
   onSubmit():void{
-    console.log(this.form.value)
+    if(this.spaceInfo.registrationNumber)  
+    {
+      const vehicleId=this.spaceInfo.parkingSpaceTitle.vehicleId;
+      this.parkingService.releaseVehicle(vehicleId)
+      .subscribe(
+        res=>{
+          console.log("res",res);  
+          this.onBackClick();
+        },
+        err=>{
+          this.error=err.error;
+          console.log(err.error)
+        })    
+    }  
+    else
+    {
+      const {parkingZoneId,parkingSpaceId}=this.spaceInfo;
+      const registerNo=this.form.get("registerNo")?.value
+      this.parkingService.parkVehicle(parkingZoneId,parkingSpaceId,registerNo)
+      .subscribe(
+        res=>{
+          console.log("res",res);  
+          this.onBackClick();
+        },
+        err=>{
+          this.error=err.error;
+          console.log(err.error)
+        })
+    }
+  
   }
 
   registerNo(){
@@ -28,6 +60,12 @@ export class CardComponent implements OnInit {
     this.form=this.formBuilder.group({
       registerNo:["",[Validators.required]]
     })
+    if(this.spaceInfo.registrationNumber)
+    {
+      this.form.get("registerNo")?.setValue(this.spaceInfo.registrationNumber);
+      this.form.get("registerNo")?.disable();
+    }
+   
   }
 
 }
