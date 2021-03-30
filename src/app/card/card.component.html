@@ -8,7 +8,7 @@
     <ng-template #elseBlock><h2>Occupied</h2></ng-template>
     <p *ngIf="spaceInfo.registrationNumber!=null; else elseBlock1">{{spaceInfo.registrationNumber}}</p>
     <ng-template #elseBlock1><p>Registration Number</p></ng-template>
-    <button class="btn" [class]="{'btn-primary':spaceInfo.registrationNumber==null,'btn-danger':spaceInfo.registrationNumber!=null}" (click)="onBackClick()">
+    <button class="btn" [disabled]="!userInfo.typeOfUser" [class]="{'btn-primary':spaceInfo.registrationNumber==null,'btn-danger':spaceInfo.registrationNumber!=null}" (click)="onBackClick()">
      <div *ngIf="spaceInfo.registrationNumber!=null; else elseBlock2">Release</div>
      <ng-template #elseBlock2>Book</ng-template>
     </button>

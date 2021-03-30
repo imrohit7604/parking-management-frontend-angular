@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 import { CustomEmailValidator } from '../common/CustomVaildator';
 
 @Component({
@@ -9,9 +10,11 @@ import { CustomEmailValidator } from '../common/CustomVaildator';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private customValidator: CustomEmailValidator) { }
+  constructor(private formBuilder: FormBuilder,private customValidator: CustomEmailValidator,private authService:AuthService) { }
 
-  signUpForm:any
+  signUpForm!:FormGroup
+  error:any
+  success:any
 
   ngOnInit(): void {
     this.signUpForm=this.formBuilder.group({
@@ -22,8 +25,6 @@ export class SignupComponent implements OnInit {
       typeOfUser:["",[Validators.required]]
     },{  validator: this.customValidator.vaildateConfirmPassword('password', 'confirmPassword')})
   }
-
- 
   
     name():AbstractControl|null
     {
@@ -47,7 +48,14 @@ export class SignupComponent implements OnInit {
     }
 
     onSubmit():void{
-  
+      this.authService.createUser(this.name()?.value,this.email()?.value,this.password()?.value,this.typeOfUser()?.value)
+      .subscribe(res=>{
+        this.success=res
+      },
+      err=>{
+        this.error=err
+      })
+
      console.log(this.signUpForm.value);
     }
 }

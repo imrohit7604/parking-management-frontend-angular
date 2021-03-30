@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { userResponse } from '../auth.service';
+
 import { ParkingService } from '../parking.service';
 
 @Component({
@@ -12,7 +14,21 @@ export class CardComponent implements OnInit {
   switch:boolean=false
   form!: FormGroup;
   error:any
+  userInfo!:userResponse
   constructor(private formBuilder:FormBuilder,private parkingService:ParkingService) { }
+
+  ngOnInit(): void {
+    this.form=this.formBuilder.group({
+      registerNo:["",[Validators.required]]
+    })
+
+    if(this.spaceInfo.registrationNumber)
+    {
+      this.form.get("registerNo")?.setValue(this.spaceInfo.registrationNumber);
+      this.form.get("registerNo")?.disable();
+    }
+    this.userInfo=JSON.parse(localStorage.getItem('userInfo')!)
+  }
 
   @Input("spaceInfo") spaceInfo:any;
   onBackClick():void{
@@ -25,13 +41,11 @@ export class CardComponent implements OnInit {
       const vehicleId=this.spaceInfo.parkingSpaceTitle.vehicleId;
       this.parkingService.releaseVehicle(vehicleId)
       .subscribe(
-        res=>{
-          console.log("res",res);  
+        res=>{ 
           this.onBackClick();
         },
         err=>{
           this.error=err.error;
-          console.log(err.error)
         })    
     }  
     else
@@ -40,13 +54,11 @@ export class CardComponent implements OnInit {
       const registerNo=this.form.get("registerNo")?.value
       this.parkingService.parkVehicle(parkingZoneId,parkingSpaceId,registerNo)
       .subscribe(
-        res=>{
-          console.log("res",res);  
+        res=>{ 
           this.onBackClick();
         },
         err=>{
           this.error=err.error;
-          console.log(err.error)
         })
     }
   
@@ -56,16 +68,6 @@ export class CardComponent implements OnInit {
     return this.form.get("registerNo");
   }
 
-  ngOnInit(): void {
-    this.form=this.formBuilder.group({
-      registerNo:["",[Validators.required]]
-    })
-    if(this.spaceInfo.registrationNumber)
-    {
-      this.form.get("registerNo")?.setValue(this.spaceInfo.registrationNumber);
-      this.form.get("registerNo")?.disable();
-    }
-   
-  }
+ 
 
 }

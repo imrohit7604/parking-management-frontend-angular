@@ -51,7 +51,7 @@ export class CustomEmailValidator {
           take(1),
           switchMap(_ =>
             this.authService
-              .chechEmail(control.value)
+              .checkEmail(control.value)
               .pipe(
                 map(res =>
                   res.found ? { existingEmail:true }:null

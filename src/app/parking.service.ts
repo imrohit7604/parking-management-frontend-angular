@@ -12,14 +12,13 @@ export class ParkingService {
   private token:string="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDVjNzEzODkwZWUyZTMyZGNhMTI5NmUiLCJlbWFpbCI6InJvaGl0MUBnbWFpbC5jb20iLCJ0eXBlT2ZVc2VyIjp0cnVlLCJpYXQiOjE2MTY3NTQ0NDN9.Scbe0A8fD6QEsEIOus72N_-5IVK2Qz-ocMnleToSWN0"
   getParkingZones()
   {
-    const headers:HttpHeaders = new  HttpHeaders().set("x-auth-token", this.token);
      const hitURL:string=this.URL.concat("/parkingZone")
-    return this.http.get<parkingZones>(hitURL, { headers });
+    return this.http.get<parkingZones>(hitURL);
   }
 
   getZoneSpaces(parkingZoneId:string="")
   {
-    const headers:HttpHeaders = new  HttpHeaders().set("x-auth-token", this.token)
+    const headers:HttpHeaders = new  HttpHeaders()
     .set("parkingZoneId",parkingZoneId);
     const hitURL:string=this.URL.concat("/parkingSpace")
     return this.http.get<any>(hitURL, { headers });
@@ -27,27 +26,29 @@ export class ParkingService {
 
   parkVehicle(parkingZoneId:string, parkingSpaceId:string, registrationNumber:string)
   {
-    const headers:HttpHeaders = new  HttpHeaders().set("x-auth-token", this.token);
      const hitURL:string=this.URL.concat("/vehicleParking")
-    return this.http.post<any>(hitURL,{parkingZoneId,parkingSpaceId,registrationNumber}, { headers });
+    return this.http.post<any>(hitURL,{parkingZoneId,parkingSpaceId,registrationNumber});
   }
 
   releaseVehicle(vehicle_Id:string)
   {
-    const headers:HttpHeaders = new  HttpHeaders().set("x-auth-token", this.token);
      const hitURL:string=this.URL.concat("/vehicleParking")
-    return this.http.put<any>(hitURL,{vehicle_Id} ,{ headers });
+    return this.http.put<any>(hitURL,{vehicle_Id} );
   }
 
   getParkingReport(date:Date)
   {
-    const headers:HttpHeaders = new  HttpHeaders().set("x-auth-token", this.token);
     const hitURL:string=this.URL.concat("/vehicleParking/parkingDetails")
-   return this.http.post  <parkingReports>(hitURL,{
+   return this.http.post<parkingReports>(hitURL,{
      date:{day: date.getDate(),
       month: date.getMonth(),
     year: date.getFullYear(),}
-  } ,{ headers });
+  } ,);
+  }
+
+  reset(){
+    const hitURL:string=this.URL.concat("/vehicleParking/reset")
+    return this.http.get(hitURL);
   }
 }
 

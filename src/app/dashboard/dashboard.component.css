@@ -14,11 +14,19 @@
     margin: auto;
 }
 
+.btn{
+  margin: 7px;
+}
+.col-8 h3{
+  margin: 7px;
+}
+.date{
+  margin: 20px;
+}
 .dropbtn {
     background-color: #4CAF50;
     color: white;
-    padding: 16px;
-    font-size: 16px;
+    padding: 8px;
     border: none;
     cursor: pointer;
   }

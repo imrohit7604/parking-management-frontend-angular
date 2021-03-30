@@ -13,7 +13,7 @@ export class ParkingreportComponent implements OnInit {
   @Input("zoneReport") zoneReport!:report
 
   ngOnInit(): void {
-    console.log("zoneReport info",this.zoneReport)
+    
   }
 
   onClick():void{

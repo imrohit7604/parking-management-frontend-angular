@@ -2,8 +2,14 @@
     <div class="container-fluid">
       <span class="navbar-brand mb-0 h1">Parking Management System</span>
       <div class="d-flex">
+        <div *ngIf="token==null; else elseBlock">
       <button class="btn btn-outline-light" (click)="onClick('login')" >Login</button>
       <button class="btn btn-outline-light" (click)="onClick('signup')" >Sign Up</button>
-      </div>
+    </div>
+    <ng-template #elseBlock>
+      <button class="btn btn-info" (click)="onLogoutClick()">Logout</button>
+      <div class="avatar">{{userInfo.name[0]| uppercase}}</div>
+    </ng-template>
+    </div>
     </div>
   </nav>

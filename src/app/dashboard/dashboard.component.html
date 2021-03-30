@@ -1,7 +1,12 @@
 <div class="container-fluid">
     <div class="row dashboard">
       <div class="col-8">
-        <h3>Parking Agent Counter DashBoard</h3>
+        <div *ngIf="userInfo?.typeOfUser; else elseBlock">
+          <h3>Parking Agent Counter DashBoard</h3>
+        </div>
+        <ng-template #elseBlock>
+          <h3>Parking Zone Assistant DashBoard</h3>
+        </ng-template>
       </div>
       <div class="col">
         <div class="dropdown">
@@ -12,7 +17,7 @@
           </div>
       </div>
       <div  class="col">
-        <h3>Reset</h3>
+      <button [disabled]="!userInfo?.typeOfUser" class="btn btn-danger" (click)="onResetClick()">Reset</button>
       </div>
     </div>
     <div class="row">
@@ -27,6 +32,9 @@
          </div>  
          <div  class="col">
            <h1 class="margin">Parking Zone Report</h1>
+           <label for="reportdate">Date :</label>
+           <input #date type="date" id="reportdate"  class="date" required>
+           <button class="btn btn-success" (click)="onReportClick(date.value)">Get Report</button>
            <div *ngFor="let report of parkingReport">
             <app-parkingreport [zoneReport]="report"></app-parkingreport>
            </div>
